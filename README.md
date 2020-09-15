@@ -7,7 +7,7 @@ The OnlyOffice Extension is a plugin that implements online edition and conversi
 ## Features
 ### Online edition
 
-![Online edition](screenshots/OnlyOffice-01.png "Online edition")
+![Online edition](/onlyoffice-lib/screenshots/OnlyOffice-01.png "Online edition")
 
 The extension adds a new action button, available both in document actions and details page. The button is only available for documents in Office format(docx, xlsx, pptx, ...)
 
@@ -16,7 +16,7 @@ https://helpcenter.onlyoffice.com/ONLYOFFICE-Editors/ONLYOFFICE-Document-Editor/
 
 The document is edited in a custom page.
 
-![Close edition](screenshots/OnlyOffice-02.png "Close edition")
+![Close edition](/onlyoffice-lib/screenshots/OnlyOffice-02.png "Close edition")
 
 You can end editing the document by clicking on the red button. The changes will be saved in a new version of the document.
 
@@ -27,7 +27,7 @@ If the edit button is not available, it means that the document is not directly 
 - LibreOffice formats (odt, odp, ods, ...)
 - Old Office version formats (doc, xls, ppt, ...)
 
-![Conversion](screenshots/OnlyOffice-03.png "Conversion")
+![Conversion](/onlyoffice-lib/screenshots/OnlyOffice-03.png "Conversion")
 
 When clicking the button, the convert action from the OnlyOffice repository module is called. A copy from the original document is created in an editable format. When the conversion is done, the document list is refreshed, displaying the new document in a editable format.
 
@@ -110,7 +110,7 @@ Run `npm start` if you want to test the extension locally. You also can build a 
 
 To check if the extension is properly deployed, you can navigate to http://localhost:4200/#/about
 
-![About page](screenshots/OnlyOffice-04.png "About page")
+![About page](/onlyoffice-lib/screenshots/OnlyOffice-04.png "About page")
 
 ### Configure OnlyOffice extension
 
