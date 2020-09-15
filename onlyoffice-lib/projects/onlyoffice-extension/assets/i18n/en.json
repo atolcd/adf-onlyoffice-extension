@@ -1,0 +1,10 @@
+{
+  "ONLYOFFICE": {
+    "EDIT": "Open with OnlyOffice",
+    "EXIT": "Finish editing",
+    "CONVERT": {
+      "ACTION": "Convert with OnlyOffice",
+      "SUCCESS": "successfully converted"
+    }
+  }
+}

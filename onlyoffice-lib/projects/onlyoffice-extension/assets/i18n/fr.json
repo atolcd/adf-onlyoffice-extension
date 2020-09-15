@@ -1,0 +1,10 @@
+{
+  "ONLYOFFICE": {
+    "EDIT": "Modifier dans OnlyOffice",
+    "EXIT": "Terminer l'édition",
+    "CONVERT": {
+      "ACTION": "Convertir avec Onlyoffice",
+      "SUCCESS": "converti avec succès"
+    }
+  }
+}

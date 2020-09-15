@@ -1,0 +1,122 @@
+{
+    "$schema": "../../../extension.schema.json",
+    "$id": "onlyoffice",
+    "$version": "1.0.0",
+    "$name": "onlyoffice.plugin",
+    "$description": "OnlyOffice Plugin",
+    "$vendor": "AtolCD",
+    "$license": "LGPL-3.0",
+    "$runtime": "0.0.1",
+
+    "actions": [
+        {
+            "id": "onlyoffice.plugin.actions.edit",
+            "type": "OO_EDIT",
+            "payload": "$(context.selection.first.entry)"
+        }, 
+        {
+            "id": "onlyoffice.plugin.actions.convert",
+            "type": "OO_CONVERT",
+            "payload": "$(context.selection.first.entry)"
+        }
+
+    ],
+
+    "features": {
+        "toolbar": [
+            {
+                "id": "app.toolbar.more",
+                "children": [
+                    {
+                        "id": "onlyoffice.plugin.viewer.openWith.action1",
+                        "type": "button",
+                        "order": 91,
+                        "icon": "edit",
+                        "title": "ONLYOFFICE.EDIT",
+                        "actions": {
+                            "click": "onlyoffice.plugin.actions.edit"
+                        },
+                        "rules": {
+                            "visible": "onlyoffice.canOpenWithOnlyOffice"
+                          }
+                    },
+                    {
+                        "id": "onlyoffice.plugin.viewer.convertWith.action1",
+                        "type": "button",
+                        "order": 92,
+                        "icon": "cached",
+                        "title": "ONLYOFFICE.CONVERT.ACTION",
+                        "actions": {
+                            "click": "onlyoffice.plugin.actions.convert"
+                        },
+                        "rules": {
+                            "visible": "onlyoffice.canConvertWithOnlyOffice"
+                          }
+                    }
+                ]
+            }
+        ],
+        "viewer": {
+            "toolbarActions": [
+                {
+                "id": "app.viewer.toolbar.more",
+                "children": [
+                    {
+                        "id": "onlyoffice.plugin.viewer.openWith.action1",
+                        "type": "button",
+                        "order": 2,
+                        "icon": "edit",
+                        "title": "ONLYOFFICE.EDIT",
+                        "actions": {
+                            "click": "onlyoffice.plugin.actions.edit"
+                        },
+                        "rules": {
+                            "visible": "onlyoffice.canOpenWithOnlyOffice"
+                          }
+                    },
+                    {
+                        "id": "onlyoffice.plugin.viewer.convertWith.action1",
+                        "type": "button",
+                        "order": 3,
+                        "icon": "cached",
+                        "title": "ONLYOFFICE.CONVERT.ACTION",
+                        "actions": {
+                            "click": "onlyoffice.plugin.actions.convert"
+                        },
+                        "rules": {
+                            "visible": "onlyoffice.canConvertWithOnlyOffice"
+                          }
+                    }
+                ]}
+            ]
+        },
+        "contextMenu" : [
+            {
+                "id": "onlyoffice.plugin.viewer.openWith.action1",
+                "type": "button",
+                "order": 451,
+                "icon": "edit",
+                "title": "ONLYOFFICE.EDIT",
+                "actions": {
+                    "click": "onlyoffice.plugin.actions.edit"
+                },
+                "rules": {
+                    "visible": "onlyoffice.canOpenWithOnlyOffice"
+                  }
+            },
+            {
+                "id": "onlyoffice.plugin.viewer.convertWith.action1",
+                "type": "button",
+                "order": 452,
+                "icon": "cached",
+                "title": "ONLYOFFICE.CONVERT.ACTION",
+                "actions": {
+                    "click": "onlyoffice.plugin.actions.convert"
+                },
+                "rules": {
+                    "visible": "onlyoffice.canConvertWithOnlyOffice"
+                  }
+            }
+        ]
+    }
+}

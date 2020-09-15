@@ -1,0 +1,7 @@
+{
+  "$schema": "../../node_modules/ng-packagr/ng-package.schema.json",
+  "dest": "../../../alfresco-content-app/dist/@atolcd/onlyoffice-extension",
+  "lib": {
+    "entryFile": "src/public-api.ts"
+  }
+}

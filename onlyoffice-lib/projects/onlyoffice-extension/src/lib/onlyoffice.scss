@@ -1,0 +1,24 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  height: 100%;
+}
+
+.onlyoffice-placeholder {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  height: 100%;
+}
+
+.modal-body {
+  padding: 0%;
+}
+
+.float {
+  position: fixed;
+  bottom: 40px;
+  right: 80px;
+  width: 145px;
+}
