@@ -1,8 +1,8 @@
-# OnlyOffice Extension - An Alfresco Content App integration of OnlyOffice for ACS
+# OnlyOffice Extension - An Alfresco Digital Workspace integration of OnlyOffice for ACS
 
 ## Description
 
-The OnlyOffice Extension is a plugin that implements online edition and conversion features from Alfresco OnlyOffice modules to Alfresco Content App.
+The OnlyOffice Extension is a plugin that implements online edition and conversion features from Alfresco OnlyOffice modules to Alfresco Digital Workspace.
 
 ## Features
 ### Online edition
@@ -38,30 +38,28 @@ When clicking the button, the convert action from the OnlyOffice repository modu
 You will need an instance of ONLYOFFICE Document Server and Alfresco with the ONLYOFFICE repository module installed. https://github.com/ONLYOFFICE/onlyoffice-alfresco
 Please refer to the OnlyOffice website (https://www.onlyoffice.com/) to get OnlyOffice solution. The documentation to configure the server is available here: https://helpcenter.onlyoffice.com/)"
 
-Check out the Alfresco Content App project from the Alfresco GitHub Repository if you have not already done so.
+If you want to build the OnlyOffice extension with ADW, you will need to get the source code for ADW 1.6.0 from Alfresco Support.
 
-```sh
-$ git clone https://github.com/Alfresco/alfresco-content-app.git
-```
-
-The OnlyOffice extension is compatible with ACA 1.11
-
-Clone the OnlyOffice project. The onlyoffice-lib needs to be in the same folder as your Alfresco Content App project
+Clone the OnlyOffice project. The onlyoffice-lib needs to be in the same folder as your ADW project.
 
 ```sh
 $ git clone https://github.com/atolcd/adf-onlyoffice-extension.git
 ```
-
 ### Build
 
-Run `npm run build:onlyoffice-extension` in /onlyoffice-lib. This will build the OnlyOffice extension in the /dist directory of your Alfresco Content App project. If the onlyoffice-lib is not in the same folder as your Alfresco Content App, an Alfresco Content App folder will be created with the sources available in alfresco-content-app/dist/onlyoffice-extension/. You can get the sources and place them manually in your Alfresco Content App /dist directory
+Run `npm run build:onlyoffice-extension` in /onlyoffice-lib. This will build the OnlyOffice extension in the /dist directory of your Alfresco Digital Workspace project. If the onlyoffice-lib is not in the same folder as your Alfresco Digital Workspace project, an ADW folder will be created with the sources available in alfresco-digital-workspace-1.6.0/dist/onlyoffice-extension/. You can get the sources and place them manually in your ADW / dist directory
 
-Then, in your Alfresco Content App directory, run `npm install dist/@atolcd/onlyoffice-extension --save`
-Since the extension works with ng-bootstrap, run `@ng-bootstrap/ng-bootstrap@4.0.0`
+Run `npm install dist/onlyoffice-extension` in the ADW project
 
-### Configure Alfresco Content App
+Run `npm start` if you want to test the extension locally. You also can build a new application by running `npm run build`.
 
-We need to configure Alfresco Content App to register the new extension.
+To check if the extension is properly deployed, you can navigate to http://localhost:4200/#/about
+
+![About page](/onlyoffice-lib/screenshots/OnlyOffice-04.png "About page")
+
+### Configure Alfresco Digital Workspace
+
+We need to configure ADW to register the new extension.
 
 In angular.json file, add these lines
 
@@ -90,7 +88,7 @@ In angular.json file, add these lines
              }
 ...
 ```
-Then, in app.extensions.json, add the reference to the OnlyOffice plugin
+Then, in plugins.json, add the reference to the OnlyOffice plugin
 
 ```json
 "$references": [..., "onlyoffice.plugin.json"]
@@ -106,11 +104,11 @@ import { OnlyofficeExtensionModule } from '@atolcd/onlyoffice-extension';
 })
 ```
 
-Run `npm start` if you want to test the extension locally. You also can build a new application by running `npm run build`.
+### Configure Alfresco Content App
 
-To check if the extension is properly deployed, you can navigate to http://localhost:4200/#/about
+Please notice that you can also build the extension for Alfresco Content App if you don't have access to ADW sources. You will need to modify the angular.json and extensions.module.ts files the same way. The plugins.json file does not exist in Alfresco Content App, so you have to modify app.extensions.json instead.
 
-![About page](/onlyoffice-lib/screenshots/OnlyOffice-04.png "About page")
+You will also need to modify the build target of the OnlyOffice extension. Please configure the onlyoffice-lib/projects/onlyoffice-extension/ng-package.json and onlyoffice-lib/package.json files so that the target matches your Alfresco Content App folder.
 
 ### Configure OnlyOffice extension
 
