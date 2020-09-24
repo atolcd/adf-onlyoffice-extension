@@ -48,6 +48,18 @@ export function canOpenWithOnlyoffice(context: RuleContext): boolean {
     if (!file.entry.content.mimeType || !getMode(file.entry.content.mimeType)) {
       return false;
     } else if (getMode(file.entry.content.mimeType) == "edit") {
+      if (file.entry.properties) {
+        if (
+          file.entry.properties["cm:lockType"] === "WRITE_LOCK" ||
+          file.entry.properties["cm:lockType"] === "READ_ONLY_LOCK"
+        ) {
+          if (file.entry.properties["onlyoffice:editing-hash"]) {
+            return true;
+          } else {
+            return false;
+          }
+        }
+      }
       return true;
     } else return false;
   }
@@ -56,15 +68,6 @@ export function canOpenWithOnlyoffice(context: RuleContext): boolean {
 export function canConvertWithOnlyOffice(context: RuleContext): boolean {
   if (canUseOnlyOfficeExtension(context)) {
     const { file } = context.selection;
-
-    if (file.entry.properties) {
-      if (
-        file.entry.properties["cm:lockType"] === "WRITE_LOCK" ||
-        file.entry.properties["cm:lockType"] === "READ_ONLY_LOCK"
-      ) {
-        return false;
-      }
-    }
 
     if (!file.entry.content.mimeType || !getMode(file.entry.content.mimeType)) {
       return false;
