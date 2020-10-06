@@ -54,13 +54,13 @@ export function canOpenWithOnlyoffice(context: RuleContext): boolean {
           file.entry.properties["cm:lockType"] === "READ_ONLY_LOCK"
         ) {
           if (file.entry.properties["onlyoffice:editing-hash"]) {
-            return true;
+            return context.permissions.check(context.selection.file, ['update']);
           } else {
             return false;
           }
         }
       }
-      return true;
+      return context.permissions.check(context.selection.file, ['update']);
     } else return false;
   }
 }
@@ -72,7 +72,7 @@ export function canConvertWithOnlyOffice(context: RuleContext): boolean {
     if (!file.entry.content.mimeType || !getMode(file.entry.content.mimeType)) {
       return false;
     } else if (getMode(file.entry.content.mimeType) == "convert") {
-      return true;
+      return context.permissions.check(context.selection.file, ['update']);
     } else return false;
   }
 }
