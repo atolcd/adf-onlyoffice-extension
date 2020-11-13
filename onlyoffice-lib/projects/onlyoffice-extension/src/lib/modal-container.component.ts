@@ -22,16 +22,16 @@ import { ActivatedRoute, Router, NavigationStart, NavigationEnd } from "@angular
 import { Subject } from "rxjs";
 import { takeUntil } from "rxjs/operators";
 import { OnlyofficeExtensionComponent } from "./onlyoffice-extension.component";
-import { OnlyofficeExtensionService } from './onlyoffice-extension.service';
-import { Store } from '@ngrx/store';
-import { AppStore, ReloadDocumentListAction } from '@alfresco/aca-shared/store';
-import { AlfrescoApiService } from '@alfresco/adf-core';
+import { OnlyofficeExtensionService } from "./onlyoffice-extension.service";
+import { Store } from "@ngrx/store";
+import { AppStore, ReloadDocumentListAction, SnackbarInfoAction } from "@alfresco/aca-shared/store";
+import { AlfrescoApiService, TranslationService } from "@alfresco/adf-core";
 
 @Component({
   selector: "lib-modal-container",
   template: "",
   styleUrls: ["./modal-container.scss"],
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None,
 })
 export class ModalContainerComponent implements OnDestroy {
   destroy$ = new Subject<any>();
@@ -43,33 +43,39 @@ export class ModalContainerComponent implements OnDestroy {
     private router: Router,
     private service: OnlyofficeExtensionService,
     private store: Store<AppStore>,
-    private apiService: AlfrescoApiService
+    private apiService: AlfrescoApiService,
+    private translationService: TranslationService
   ) {
     this.router.events.subscribe((event: any) => {
       if (event instanceof NavigationStart) {
         this.currentDialog.dismiss();
       }
     });
-    this.route.params.pipe(takeUntil(this.destroy$)).subscribe(params => {
+
+    var successMsg;
+    this.translationService.get("ONLYOFFICE.EDIT.SUCCESS").subscribe((translation) => {
+      successMsg = translation;
+    });
+
+    this.route.params.pipe(takeUntil(this.destroy$)).subscribe((params) => {
       let options: NgbModalOptions = {
         size: "lg",
         windowClass: "onlyoffice-modal"
       };
 
-      this.currentDialog = this.modalService.open(
-        OnlyofficeExtensionComponent,
-        options
-      );
+      this.currentDialog = this.modalService.open(OnlyofficeExtensionComponent, options);
       let id = params.contentId;
       this.currentDialog.componentInstance.contentId = id;
 
       this.currentDialog.result.then(
-        result => {
+        (result) => {
           this.router.navigateByUrl(this.service.getPreviousUrl());
+          this.store.dispatch(new SnackbarInfoAction(successMsg));
           this.unlockNode(id);
         },
-        reason => {
+        (reason) => {
           this.router.navigateByUrl(this.service.getPreviousUrl());
+          this.store.dispatch(new SnackbarInfoAction(successMsg));
           this.unlockNode(id);
         }
       );
@@ -81,18 +87,14 @@ export class ModalContainerComponent implements OnDestroy {
   }
 
   unlockNode(id) {
-    this.apiService.getInstance().ecmClient.callApi('nodes/' + id + '/unlock', 'POST',
-      {},
-      {},
-      {},
-      {},
-      {},
-      ['application/json'],
-      ['application/json']
-    ).then(response => {
-      this.store.dispatch(new ReloadDocumentListAction());
-    }).catch(error => {
-      this.store.dispatch(new ReloadDocumentListAction());
-    })
+    this.apiService
+      .getInstance()
+      .ecmClient.callApi("nodes/" + id + "/unlock", "POST", {}, {}, {}, {}, {}, ["application/json"], ["application/json"])
+      .then((response) => {
+        this.store.dispatch(new ReloadDocumentListAction());
+      })
+      .catch((error) => {
+        this.store.dispatch(new ReloadDocumentListAction());
+      });
   }
 }

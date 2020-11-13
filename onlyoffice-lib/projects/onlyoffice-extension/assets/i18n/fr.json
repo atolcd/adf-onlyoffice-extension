@@ -1,6 +1,9 @@
 {
   "ONLYOFFICE": {
-    "EDIT": "Modifier dans OnlyOffice",
+    "EDIT": {
+      "ACTION": "Modifier dans OnlyOffice",
+      "SUCCESS": "Les modifications ont été prises en compte. Une nouvelle prévisualisation va être générée."
+    },
     "EXIT": "Terminer l'édition",
     "CONVERT": {
       "ACTION": "Convertir avec Onlyoffice",

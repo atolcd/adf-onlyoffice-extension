@@ -1,6 +1,9 @@
 {
   "ONLYOFFICE": {
-    "EDIT": "Open with OnlyOffice",
+    "EDIT": {
+      "ACTION": "Open with OnlyOffice",
+      "SUCCESS": "Document saved successfully. A new rendition will be generated."
+    },
     "EXIT": "Finish editing",
     "CONVERT": {
       "ACTION": "Convert with OnlyOffice",
