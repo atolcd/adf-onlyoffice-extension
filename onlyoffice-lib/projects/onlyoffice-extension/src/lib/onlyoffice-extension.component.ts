@@ -25,7 +25,7 @@ import {
   ElementRef
 } from "@angular/core";
 import { OnlyofficeExtensionService } from "./onlyoffice-extension.service";
-import { AppConfigService, TRANSLATION_PROVIDER } from "@alfresco/adf-core";
+import { AppConfigService } from "@alfresco/adf-core";
 import { DOCUMENT } from "@angular/platform-browser";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 export const OO_API_SCRIPT_PATH = "/OfficeWeb/apps/api/documents/api.js";
