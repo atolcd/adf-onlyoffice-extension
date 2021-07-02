@@ -22,7 +22,7 @@ import { OOEffects } from "./effects/onlyoffice.effects";
 import { RouterModule } from "@angular/router";
 import { OO_ROUTES } from "./onlyoffice.routes";
 import { OnlyofficeExtensionService } from "./onlyoffice-extension.service";
-import { ExtensionService } from "@alfresco/adf-extensions";
+import { ExtensionService, provideExtensionConfig } from "@alfresco/adf-extensions";
 import { canOpenWithOnlyoffice, canConvertWithOnlyOffice } from "./evaluators";
 import { ModalContainerComponent } from "./modal-container.component";
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
@@ -53,7 +53,8 @@ import { TranslateModule, TranslateLoader } from "@ngx-translate/core";
         name: "onlyoffice-extension",
         source: "assets/onlyoffice-extension"
       }
-    }
+    },
+    provideExtensionConfig(['onlyoffice.plugin.json'])
   ]
 })
 export class OnlyofficeExtensionModule {

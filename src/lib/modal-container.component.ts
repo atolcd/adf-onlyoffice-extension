@@ -18,7 +18,7 @@
 import { Component, OnDestroy, ViewEncapsulation } from "@angular/core";
 import { NgbModal, NgbModalOptions, NgbModalRef } from "@ng-bootstrap/ng-bootstrap";
 
-import { ActivatedRoute, Router, NavigationStart, NavigationEnd } from "@angular/router";
+import { ActivatedRoute, Router, NavigationStart } from "@angular/router";
 import { Subject } from "rxjs";
 import { takeUntil } from "rxjs/operators";
 import { OnlyofficeExtensionComponent } from "./onlyoffice-extension.component";
