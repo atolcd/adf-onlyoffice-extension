@@ -24,8 +24,8 @@ import { takeUntil } from "rxjs/operators";
 import { OnlyofficeExtensionComponent } from "./onlyoffice-extension.component";
 import { OnlyofficeExtensionService } from "./onlyoffice-extension.service";
 import { Store } from "@ngrx/store";
-import { AppStore, ReloadDocumentListAction, SnackbarInfoAction } from "@alfresco/aca-shared/store";
-import { AlfrescoApiService, TranslationService } from "@alfresco/adf-core";
+import { AppStore, SnackbarInfoAction } from "@alfresco/aca-shared/store";
+import { TranslationService } from "@alfresco/adf-core";
 
 @Component({
   selector: "lib-modal-container",
@@ -43,7 +43,6 @@ export class ModalContainerComponent implements OnDestroy {
     private router: Router,
     private service: OnlyofficeExtensionService,
     private store: Store<AppStore>,
-    private apiService: AlfrescoApiService,
     private translationService: TranslationService
   ) {
     this.router.events.subscribe((event: any) => {
@@ -68,15 +67,13 @@ export class ModalContainerComponent implements OnDestroy {
       this.currentDialog.componentInstance.contentId = id;
 
       this.currentDialog.result.then(
-        (result) => {
+        () => {
           this.router.navigateByUrl(this.service.getPreviousUrl());
           this.store.dispatch(new SnackbarInfoAction(successMsg));
-          this.unlockNode(id);
         },
-        (reason) => {
+        () => {
           this.router.navigateByUrl(this.service.getPreviousUrl());
           this.store.dispatch(new SnackbarInfoAction(successMsg));
-          this.unlockNode(id);
         }
       );
     });
@@ -84,17 +81,5 @@ export class ModalContainerComponent implements OnDestroy {
 
   ngOnDestroy() {
     this.destroy$.next();
-  }
-
-  unlockNode(id) {
-    this.apiService
-      .getInstance()
-      .ecmClient.callApi("nodes/" + id + "/unlock", "POST", {}, {}, {}, {}, {}, ["application/json"], ["application/json"])
-      .then((response) => {
-        this.store.dispatch(new ReloadDocumentListAction());
-      })
-      .catch((error) => {
-        this.store.dispatch(new ReloadDocumentListAction());
-      });
   }
 }

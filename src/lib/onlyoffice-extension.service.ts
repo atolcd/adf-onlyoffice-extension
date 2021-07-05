@@ -107,13 +107,13 @@ export class OnlyofficeExtensionService {
         const script = this.renderer.createElement("script");
         script.text =
           'new DocsAPI.DocEditor("placeholder",' +
-          JSON.stringify(response) +
+          JSON.stringify(response.config) +
           ");";
         this.renderer.appendChild(
           this.onlyofficePlaceholder.nativeElement,
           script
         );
-        this.titleService.setTitle(response.document.title + " - ONLYOFFICE");
+        this.titleService.setTitle(response.config.document.title + " - ONLYOFFICE");
       });
   }
 

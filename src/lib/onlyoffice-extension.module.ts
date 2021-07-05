@@ -31,6 +31,7 @@ import {
   TranslateLoaderService
 } from "@alfresco/adf-core";
 import { TranslateModule, TranslateLoader } from "@ngx-translate/core";
+import { WebscriptApi } from "@alfresco/js-api";
 
 @NgModule({
   declarations: [OnlyofficeExtensionComponent, ModalContainerComponent],
@@ -46,6 +47,7 @@ import { TranslateModule, TranslateLoader } from "@ngx-translate/core";
   exports: [OnlyofficeExtensionComponent, ModalContainerComponent],
   providers: [
     OnlyofficeExtensionService,
+    WebscriptApi,
     {
       provide: TRANSLATION_PROVIDER,
       multi: true,

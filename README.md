@@ -37,6 +37,8 @@ When clicking the button, the convert action from the OnlyOffice repository modu
 ### Prerequisites
 
 You will need an instance of ONLYOFFICE Document Server and Alfresco with the ONLYOFFICE repository module installed. <https://github.com/ONLYOFFICE/onlyoffice-alfresco>
+You will also need the ONLYOFFICE module for Alfresco Content Services. The extension is compatible with the version 4.3.0.
+You can find the module here <https://github.com/ONLYOFFICE/onlyoffice-alfresco/releases/tag/v4.3.0>.
 Please refer to the OnlyOffice website (<https://www.onlyoffice.com/>) to get OnlyOffice solution. The documentation to configure the server is available here: <https://helpcenter.onlyoffice.com/>)"
 
 If you want to build the OnlyOffice extension with ADW, you will need to get the source code for ADW 2.0.0 from Alfresco Support.

@@ -21,12 +21,15 @@ import { map } from 'rxjs/operators';
 
 import { OOEdit, OO_EDIT, OOConvert, OO_CONVERT } from '../actions/onlyoffice.actions';
 import { OnlyofficeExtensionService } from '../onlyoffice-extension.service';
+import { AlfrescoApiService } from '@alfresco/adf-core';
+import { NodeAssociationPaging } from '@alfresco/js-api';
 
 @Injectable()
 export class OOEffects {
   constructor(
     private actions$: Actions,
-    private onlyofficeExtensionService: OnlyofficeExtensionService
+    private onlyofficeExtensionService: OnlyofficeExtensionService,
+    private apiService: AlfrescoApiService
   ) {}
 
   @Effect({ dispatch: false })
@@ -34,7 +37,14 @@ export class OOEffects {
     ofType<OOEdit>(OO_EDIT),
     map(action => {
       if (action.payload) {
-        this.onlyofficeExtensionService.onEdit(action.payload);
+        this.apiService.getInstance().core.nodesApi.getTargetAssociations(action.payload.id, { 'where': '(assocType=cm:original)'}).then((res: NodeAssociationPaging) => {
+            if (res.list.entries.length == 1) {
+                this.onlyofficeExtensionService.onEdit(res.list.entries[0].entry);
+            }
+            else {
+                this.onlyofficeExtensionService.onEdit(action.payload);
+            }
+          });
       }
     })
   );

@@ -1,5 +1,5 @@
 {
-    "$schema": "../../../extension.schema.json",
+    "$schema": "../../../apps/content-ce/extension.schema.json",
     "$id": "onlyoffice",
     "$version": "1.0.0",
     "$name": "onlyoffice.plugin",
@@ -13,13 +13,12 @@
             "id": "onlyoffice.plugin.actions.edit",
             "type": "OO_EDIT",
             "payload": "$(context.selection.first.entry)"
-        }, 
+        },
         {
             "id": "onlyoffice.plugin.actions.convert",
             "type": "OO_CONVERT",
             "payload": "$(context.selection.first.entry)"
         }
-
     ],
 
     "features": {
