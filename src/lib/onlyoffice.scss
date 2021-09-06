@@ -1,21 +1,6 @@
-@import "node_modules/bootstrap/scss/bootstrap";
-
-:host {
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-  height: 100%;
-}
-
-.onlyoffice-placeholder {
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-  height: 100%;
-}
-
-.modal-body {
-  padding: 0%;
+.content {
+    width: 100vw;
+    height: 100vh;
 }
 
 .float {
@@ -23,4 +8,5 @@
   bottom: 40px;
   right: 80px;
   width: 145px;
+  background: #CB0101;
 }

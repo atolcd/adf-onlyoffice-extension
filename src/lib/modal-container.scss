@@ -1,18 +1,3 @@
-.onlyoffice-modal .modal-lg {
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-  height: 100%;
-  max-width: 100%;
-  margin: auto;
-}
-
-.modal-dialog {
-  height: 100%;
-  width: 100%;
-}
-
-.modal-content {
-  height: 100vh;
-  width: 100vw;
+.custom-dialog-container .mat-dialog-container {
+    padding: unset !important;
 }

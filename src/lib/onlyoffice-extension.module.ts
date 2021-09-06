@@ -25,23 +25,23 @@ import { OnlyofficeExtensionService } from "./onlyoffice-extension.service";
 import { ExtensionService, provideExtensionConfig } from "@alfresco/adf-extensions";
 import { canOpenWithOnlyoffice, canConvertWithOnlyOffice } from "./evaluators";
 import { ModalContainerComponent } from "./modal-container.component";
-import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import {
   TRANSLATION_PROVIDER,
   TranslateLoaderService
 } from "@alfresco/adf-core";
 import { TranslateModule, TranslateLoader } from "@ngx-translate/core";
 import { WebscriptApi } from "@alfresco/js-api";
+import { MatButtonModule } from "@angular/material/button";
 
 @NgModule({
   declarations: [OnlyofficeExtensionComponent, ModalContainerComponent],
   imports: [
     EffectsModule.forFeature([OOEffects]),
     RouterModule.forRoot(OO_ROUTES),
-    NgbModule,
     TranslateModule.forRoot({
       loader: { provide: TranslateLoader, useClass: TranslateLoaderService }
-    })
+    }),
+    MatButtonModule
   ],
   entryComponents: [OnlyofficeExtensionComponent],
   exports: [OnlyofficeExtensionComponent, ModalContainerComponent],

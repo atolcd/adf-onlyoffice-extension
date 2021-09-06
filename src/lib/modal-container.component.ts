@@ -16,7 +16,6 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 import { Component, OnDestroy, ViewEncapsulation } from "@angular/core";
-import { NgbModal, NgbModalOptions, NgbModalRef } from "@ng-bootstrap/ng-bootstrap";
 
 import { ActivatedRoute, Router, NavigationStart } from "@angular/router";
 import { Subject } from "rxjs";
@@ -26,6 +25,7 @@ import { OnlyofficeExtensionService } from "./onlyoffice-extension.service";
 import { Store } from "@ngrx/store";
 import { AppStore, SnackbarInfoAction } from "@alfresco/aca-shared/store";
 import { TranslationService } from "@alfresco/adf-core";
+import { MatDialog, MatDialogRef } from "@angular/material/dialog";
 
 @Component({
   selector: "lib-modal-container",
@@ -35,10 +35,10 @@ import { TranslationService } from "@alfresco/adf-core";
 })
 export class ModalContainerComponent implements OnDestroy {
   destroy$ = new Subject<any>();
-  currentDialog: NgbModalRef = null;
+  dialogRef : MatDialogRef<any>
 
   constructor(
-    private modalService: NgbModal,
+    private dialogService: MatDialog,
     private route: ActivatedRoute,
     private router: Router,
     private service: OnlyofficeExtensionService,
@@ -47,26 +47,15 @@ export class ModalContainerComponent implements OnDestroy {
   ) {
     this.router.events.subscribe((event: any) => {
       if (event instanceof NavigationStart) {
-        this.currentDialog.dismiss();
+        this.dialogRef.close();
       }
     });
 
-    var successMsg;
-    this.translationService.get("ONLYOFFICE.EDIT.SUCCESS").subscribe((translation) => {
-      successMsg = translation;
-    });
+    let successMsg = this.translationService.instant("ONLYOFFICE.EDIT.SUCCESS");
 
     this.route.params.pipe(takeUntil(this.destroy$)).subscribe((params) => {
-      let options: NgbModalOptions = {
-        size: "lg",
-        windowClass: "onlyoffice-modal"
-      };
-
-      this.currentDialog = this.modalService.open(OnlyofficeExtensionComponent, options);
-      let id = params.contentId;
-      this.currentDialog.componentInstance.contentId = id;
-
-      this.currentDialog.result.then(
+      this.dialogRef = this.dialogService.open(OnlyofficeExtensionComponent, {data : { contentId : params.contentId}, panelClass: 'custom-dialog-container'});
+      this.dialogRef.afterClosed().subscribe(
         () => {
           this.router.navigateByUrl(this.service.getPreviousUrl());
           this.store.dispatch(new SnackbarInfoAction(successMsg));

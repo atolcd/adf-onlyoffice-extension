@@ -26,8 +26,8 @@ import {
 } from "@angular/core";
 import { OnlyofficeExtensionService } from "./onlyoffice-extension.service";
 import { AppConfigService } from "@alfresco/adf-core";
-import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { DOCUMENT } from "@angular/common";
+import { MatDialog, MAT_DIALOG_DATA } from "@angular/material/dialog";
 export const OO_API_SCRIPT_PATH = "/OfficeWeb/apps/api/documents/api.js";
 
 @Component({
@@ -36,7 +36,6 @@ export const OO_API_SCRIPT_PATH = "/OfficeWeb/apps/api/documents/api.js";
   styleUrls: ["./onlyoffice.scss"]
 })
 export class OnlyofficeExtensionComponent implements OnInit, AfterViewInit {
-  public contentId: string;
   @ViewChild("onlyoffice")
   onlyofficePlaceholder: ElementRef;
   exitText: string = "";
@@ -44,9 +43,10 @@ export class OnlyofficeExtensionComponent implements OnInit, AfterViewInit {
     private onlyofficeExtensionService: OnlyofficeExtensionService,
     private appConfigService: AppConfigService,
     private renderer: Renderer2,
-    private modalService: NgbModal,
+    private dialogService: MatDialog,
     @Inject(DOCUMENT)
-    private _document
+    private _document,
+    @Inject(MAT_DIALOG_DATA) public data: any
   ) {
     onlyofficeExtensionService.renderer = renderer;
   }
@@ -61,12 +61,12 @@ export class OnlyofficeExtensionComponent implements OnInit, AfterViewInit {
     script.src =
       this.appConfigService.get("onlyOfficeUrl") + OO_API_SCRIPT_PATH;
     script.onload = () => {
-      this.onlyofficeExtensionService.getContentConfig(this.contentId);
+      this.onlyofficeExtensionService.getContentConfig(this.data.contentId);
     };
     this.renderer.appendChild(this._document.head, script);
   }
 
   close() {
-    this.modalService.dismissAll();
+    this.dialogService.closeAll();
   }
 }
