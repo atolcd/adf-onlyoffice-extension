@@ -55,7 +55,7 @@ The repository should be named "onlyoffice-extension".
 
 We need to configure ADW to register the new extension.
 
-In angular.json file, add these lines
+In **angular.json** file, add these lines
 
 ```json
 {
@@ -83,7 +83,7 @@ In angular.json file, add these lines
 ...
 ```
 
-Then, in angular.json, add the project "onlyoffice-extension"
+Then, in **angular.json**, add the project "onlyoffice-extension"
 
 ```json
 {
@@ -119,7 +119,7 @@ Then, in angular.json, add the project "onlyoffice-extension"
 }
 ```
 
-In tsconfig.json, add the following path
+In **tsconfig.base.json**, add the following path
 
 ```json
 {
@@ -129,13 +129,25 @@ In tsconfig.json, add the following path
 }
 ```
 
-Finally, in extensions.module.ts, import and add the OnlyOffice module
+In **nx.json**, add the project
+```json
+{
+"projects": {
+    ...
+    "onlyoffice-extension": {
+        "tags" : []
+    }
+  },
+}
+```
+
+Finally, in **extensions.module.ts**, import and add the OnlyOffice module
 
 ```typescript
 ...
 import { OnlyofficeExtensionModule } from '@atolcd/onlyoffice-extension';
 @NgModule({
- imports: [..., OnlyofficeExtensionModule]
+ imports: [..., OnlyofficeExtensionModule, ExtensionsOrderExtensionModule,]
 })
 ```
 
