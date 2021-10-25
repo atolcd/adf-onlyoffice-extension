@@ -30,7 +30,7 @@ import { MatDialog, MatDialogRef } from "@angular/material/dialog";
 @Component({
   selector: "lib-modal-container",
   template: "",
-  styleUrls: ["./modal-container.scss"],
+  styleUrls: ["./modal-container.component.scss"],
   encapsulation: ViewEncapsulation.None,
 })
 export class ModalContainerComponent implements OnDestroy {

@@ -32,8 +32,8 @@ export const OO_API_SCRIPT_PATH = "/OfficeWeb/apps/api/documents/api.js";
 
 @Component({
   selector: "lib-onlyoffice-extension",
-  templateUrl: "./onlyoffice-edit.html",
-  styleUrls: ["./onlyoffice.scss"]
+  templateUrl: "./onlyoffice-extension.component.html",
+  styleUrls: ["./onlyoffice-extension.component.scss"]
 })
 export class OnlyofficeExtensionComponent implements OnInit, AfterViewInit {
   @ViewChild("onlyoffice")
