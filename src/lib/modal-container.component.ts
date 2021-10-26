@@ -70,5 +70,6 @@ export class ModalContainerComponent implements OnDestroy {
 
   ngOnDestroy() {
     this.destroy$.next();
+    this.service.reloadDocumentWhenSaved();
   }
 }

@@ -21,7 +21,7 @@ import {
   WebscriptApi
 } from "@alfresco/js-api";
 import { Router, NavigationEnd } from "@angular/router";
-import { AlfrescoApiService, TranslationService } from "@alfresco/adf-core";
+import { AlfrescoApiService, TranslationService, NodesApiService } from "@alfresco/adf-core";
 import { Title } from "@angular/platform-browser";
 import { Store } from "@ngrx/store";
 import {
@@ -49,7 +49,8 @@ export class OnlyofficeExtensionService {
     private apiService: AlfrescoApiService,
     private titleService: Title,
     private store: Store<AppStore>,
-    private translationService: TranslationService
+    private translationService: TranslationService,
+    private nodeService: NodesApiService
   ) {
 
     this.currentUrl = this.router.url;
@@ -116,6 +117,21 @@ export class OnlyofficeExtensionService {
         this.titleService.setTitle(response.config.document.title + " - ONLYOFFICE");
       });
   }
+
+  public reloadDocumentWhenSaved() {
+    let interval = setInterval(()=>{
+      this.nodeService.getNode(this.contentId).subscribe(res=>{
+        if (!res.properties["cm:lockType"]){
+          clearInterval(interval);
+          this.store.dispatch(new ReloadDocumentListAction());
+        }
+      })
+    }, 1000);
+
+    setTimeout(()=>{
+      clearInterval(interval);
+    }, 10000);
+}
 
   public getPreviousUrl() {
     return this.previousUrl;
