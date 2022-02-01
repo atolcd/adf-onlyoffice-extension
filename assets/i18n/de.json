@@ -1,0 +1,13 @@
+{
+  "ONLYOFFICE": {
+    "EDIT": {
+      "ACTION": "In OnlyOffice bearbeiten",
+      "SUCCESS": "Dokument erfolgreich gespeichert. Eine neue Version wird erstellt."
+    },
+    "EXIT": "Bearbeiten beenden",
+    "CONVERT": {
+      "ACTION": "Mit OnlyOffice konvertieren",
+      "SUCCESS": "Erfolgreich konvertiert"
+    }
+  }
+}
