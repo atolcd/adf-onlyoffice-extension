@@ -62,7 +62,7 @@ export function canOpenWithOnlyoffice(context: RuleContext): boolean {
       }
       return context.permissions.check(context.selection.file, ['update']);
     } else return false;
-  }
+  } else return false;
 }
 
 export function canConvertWithOnlyOffice(context: RuleContext): boolean {
@@ -74,5 +74,5 @@ export function canConvertWithOnlyOffice(context: RuleContext): boolean {
     } else if (getMode(file.entry.content.mimeType) == "convert") {
       return context.permissions.check(context.selection.file, ['update']);
     } else return false;
-  }
+  } else return false;
 }

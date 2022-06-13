@@ -108,7 +108,7 @@ export class OnlyofficeExtensionService {
         const script = this.renderer.createElement("script");
         script.text =
           'new DocsAPI.DocEditor("placeholder",' +
-          JSON.stringify(response.config) +
+          JSON.stringify(response.editorConfig) +
           ");";
         this.renderer.appendChild(
           this.onlyofficePlaceholder.nativeElement,
