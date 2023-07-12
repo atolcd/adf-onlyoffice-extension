@@ -37,12 +37,16 @@ export class OOEffects {
     ofType<OOEdit>(OO_EDIT),
     map(action => {
       if (action.payload) {
-        this.apiService.getInstance().core.nodesApi.getTargetAssociations(action.payload.id, { 'where': '(assocType=cm:original)'}).then((res: NodeAssociationPaging) => {
+        this.apiService
+          .getInstance()
+          .core.nodesApi.getSourceAssociations(action.payload.id, {
+            where: "(assocType=cm:workingcopylink)",
+          })
+          .then((res: NodeAssociationPaging) => {
             if (res.list.entries.length == 1) {
-                this.onlyofficeExtensionService.onEdit(res.list.entries[0].entry);
-            }
-            else {
-                this.onlyofficeExtensionService.onEdit(action.payload);
+              this.onlyofficeExtensionService.onEdit(res.list.entries[0].entry);
+            } else {
+              this.onlyofficeExtensionService.onEdit(action.payload);
             }
           });
       }
