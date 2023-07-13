@@ -153,7 +153,7 @@ import { OnlyofficeExtensionModule } from '@atolcd/onlyoffice-extension';
 
 ### Build
 
-Run `npm start content-ee` if you want to test the extension locally. You also can build a new application by running `npm run build content-ee`.
+Run `npm start content-ee` if you want to test the extension locally. You also can build a new application by running `npm run build content-ee` and `npm run build content-ee prod` for production.
 
 ### Configure Alfresco Content App
 
@@ -170,6 +170,9 @@ Once the extension is properly installed, you’ll need to add your own onlyoffi
 ## Contributors
 
 Created by Antoine HEITZMANN
+
+Contributors:
+- [Alexandre BARBIER](https://github.com/AlexandreBarbier1)
 
 ## LICENSE
 
